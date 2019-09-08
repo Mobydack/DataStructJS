@@ -1,7 +1,7 @@
 {
 	"hooks": {
-		"precommit: "lint-staged && tslint",
+		"precommit": "lint-staged && tslint",
 		"commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-		"prepare-commit-msg": "exec < dev/tty && npx git-cz --hook || true"
+		"prepare-commit-msg": "exec < /dev/tty && npx git-cz --hook || true"
 	}
 }
