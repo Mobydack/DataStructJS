@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "tslint",
-    "test:fix": "tslint --fix"
+    "lint": "tslint",
+    "lint:fix": "tslint --fix",
+    "test": "npx jest"
   },
   "author": "",
   "license": "ISC",

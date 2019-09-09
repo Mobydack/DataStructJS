@@ -1,7 +1,8 @@
 {
 	"compilerOptions": {
 		"outDir": "build",
-		"module": "none",
+		"module": "umd",
+		"target": "es2017",
 		"sourceMap": true,
 		"noImplicitAny": true
 	},

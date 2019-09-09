@@ -57,7 +57,8 @@
 				"check-format"
 			]
 		},
-		"class-name": true
+		"class-name": true,
+		"no-namespace": [true, "allow-declarations"]
 	},
 	"rulesDirectory": []
 }

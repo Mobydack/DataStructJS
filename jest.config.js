@@ -1,8 +1,4 @@
 module.exports = {
-	roots: [
-		'./src'
-	],
-	transfrom: {
-		'^.+\\.tsx?$': 'ts-jest',
-	}
+  preset: 'ts-jest',
+  testEnvironment: 'node',
 };
