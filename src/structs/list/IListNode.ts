@@ -1,4 +1,3 @@
-import { IList } from './IList';
 import { Node } from './ListNode';
 
 export interface IListNode<T> {
@@ -7,5 +6,3 @@ export interface IListNode<T> {
 	value: T;
 	list: ThisType<T>;
 }
-
-export type TListNode<T> =  Node<T> | null;

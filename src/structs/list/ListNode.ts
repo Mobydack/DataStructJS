@@ -1,5 +1,4 @@
-import { IList } from './IList';
-import { IListNode, TListNode } from './IListNode';
+import { IListNode } from './IListNode';
 import { List } from './list';
 
 export class Node<T> implements IListNode<T> {

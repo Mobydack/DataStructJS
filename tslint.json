@@ -54,7 +54,8 @@
 			"options": [
 				"require-const-for-all-caps",
 				"ban-keywords",
-				"check-format"
+				"check-format",
+				"allow-leading-underscore"
 			]
 		},
 		"class-name": true,

@@ -1,9 +1,9 @@
-import { IList, IListProps } from './IList';
+import { IList } from './IList';
 import { Node } from './ListNode';
 
 export class List<T> implements IList<T> {
-	public first: Node<T> | null = null;
-	public last: Node<T> | null = null;
+	private _first: Node<T> = null;
+	private _last: Node<T> = null;
 	private _length: number = 0;
 
 	public addAfter(node: Node<T>, value: Node<T> | T): Node<T> {
@@ -20,10 +20,10 @@ export class List<T> implements IList<T> {
 			return;
 		}
 
-		if (node === this.last) {
+		if (node === this._last) {
 			node.next = value;
 			value.previous = node;
-			this.last = value;
+			this._last = value;
 		} else {
 			value.next = node.next;
 			value.previous = node;
@@ -50,13 +50,13 @@ export class List<T> implements IList<T> {
 			return;
 		}
 
-		if (node === this.first) {
+		if (node === this._first) {
 			node.previous = value;
 			value.next = node;
-			this.first = value;
+			this._first = value;
 		} else {
 			value.previous = node.previous;
-			value.next = node; 
+			value.next = node;
 			node.previous.next = node;
 			node.previous = node;
 		}
@@ -77,12 +77,12 @@ export class List<T> implements IList<T> {
 		}
 
 		if (! this._length) {
-			this.first = value;
-			this.last = value;
+			this._first = value;
+			this._last = value;
 		} else {
 			value.next = this.first;
-			this.first.previous = value;
-			this.first = value;
+			this._first.previous = value;
+			this._first = value;
 		}
 
 		this._length++;
@@ -99,12 +99,12 @@ export class List<T> implements IList<T> {
 		}
 
 		if (! this._length) {
-			this.first = value;
-			this.last = value;
+			this._first = value;
+			this._last = value;
 		} else {
-			value.previous = this.last;
-			this.last.next = value;
-			this.last = value;
+			value.previous = this._last;
+			this._last.next = value;
+			this._last = value;
 		}
 
 		this._length++;
@@ -112,7 +112,7 @@ export class List<T> implements IList<T> {
 	}
 
 	public find(value: T) {
-		let node: Node<T> = this.first;
+		let node: Node<T> = this._first;
 		let desiredNode: Node<T> = null;
 
 		while (node && ! desiredNode) {
@@ -128,7 +128,7 @@ export class List<T> implements IList<T> {
 	}
 
 	public findLast(value: T) {
-		let node: Node<T> = this.last;
+		let node: Node<T> = this._last;
 		let desiredNode: Node<T> = null;
 
 		while (node && ! desiredNode) {
@@ -144,27 +144,27 @@ export class List<T> implements IList<T> {
 	}
 
 	public removeFirst() {
-		if (! this.length) {
+		if (! this._length) {
 			return;
 		}
 
-		this.first.next.previous = null;
-		this.first = this.first.next;
+		this._first.next.previous = null;
+		this._first = this.first.next;
 		this._length--;
 	}
 
 	public removeLast() {
-		if (! this.length){
+		if (! this._length) {
 			return;
 		}
 
-		this.last.previous.next = null;
-		this.last = this.last.previous;
+		this._last.previous.next = null;
+		this._last = this._last.previous;
 		this._length--;
 	}
 
 	public remove(value: Node<T> | T): boolean {
-		if (! this.length) {
+		if (! this._length) {
 			return false;
 		}
 
@@ -180,11 +180,11 @@ export class List<T> implements IList<T> {
 			return false;
 		}
 
-		if (value === this.first) {
+		if (value === this._first) {
 			this.removeFirst();
 
 			return true;
-		} else if (value === this.last) {
+		} else if (value === this._last) {
 			this.removeLast();
 
 			return true;
@@ -215,7 +215,7 @@ export class List<T> implements IList<T> {
 
 	public toArray(): T[] {
 		const arr: T[] = [];
-		let node: Node<T> = this.first;
+		let node: Node<T> = this._first;
 
 		while (node) {
 			arr.push(node.value);
@@ -227,5 +227,13 @@ export class List<T> implements IList<T> {
 
 	get length() {
 		return this._length;
+	}
+
+	get first() {
+		return this._first;
+	}
+
+	get last() {
+		return this._last;
 	}
 }
