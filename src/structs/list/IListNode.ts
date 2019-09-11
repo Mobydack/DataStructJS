@@ -5,4 +5,5 @@ export interface IListNode<T> {
 	previous: Node<T>;
 	value: T;
 	list: ThisType<T>;
+	destructor(): void;
 }

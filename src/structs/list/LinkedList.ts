@@ -1,11 +1,15 @@
 import { IList } from './IList';
 import { Node } from './ListNode';
 
-export class List<T> implements IList<T> {
+export class LinkedList<T> implements IList<T> {
 	private _first: Node<T> = null;
 	private _last: Node<T> = null;
 	private _length: number = 0;
-
+	constructor(values: T[] = []) {
+		values.forEach((value: T) => {
+			this.add(value);
+		});
+	}
 	public addAfter(node: Node<T>, value: Node<T> | T): Node<T> {
 		if (! (node && node.list === this)) {
 			return;
@@ -92,6 +96,7 @@ export class List<T> implements IList<T> {
 	public addLast(value: Node<T> | T): Node<T> {
 		if (! (value instanceof Node)) {
 			value = new Node(value);
+			value.list = this;
 		}
 
 		if (value.list !== this) {
@@ -148,8 +153,18 @@ export class List<T> implements IList<T> {
 			return;
 		}
 
-		this._first.next.previous = null;
-		this._first = this.first.next;
+		let deleteElement = this._first;
+
+		if (this._length === 1) {
+			this._first = null;
+			this._last = null;
+		} else {
+			deleteElement.next.previous = null;
+			this._first = deleteElement.next;
+		}
+
+		deleteElement.destructor();
+		deleteElement = null;
 		this._length--;
 	}
 
@@ -158,8 +173,19 @@ export class List<T> implements IList<T> {
 			return;
 		}
 
-		this._last.previous.next = null;
-		this._last = this._last.previous;
+		let deleteElement = this._last;
+
+		if (this._length === 1) {
+			this._first = null;
+			this._last = null;
+		} else {
+			deleteElement.previous.next = null;
+			this._last = deleteElement.previous;
+		}
+
+		deleteElement.destructor();
+		deleteElement = null;
+
 		this._length--;
 	}
 
@@ -191,6 +217,7 @@ export class List<T> implements IList<T> {
 		} else {
 			value.next.previous = value.previous;
 			value.previous.next = value.next;
+			value.destructor();
 		}
 
 		this._length--;
