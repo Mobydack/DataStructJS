@@ -1,4 +1,4 @@
-import { ICollection } from "../../interfaces/ICollection";
+import { ICollection } from '../../interfaces/ICollection';
 
 export interface IQueue<T> extends ICollection<T> {
 	dequeue(): T;
