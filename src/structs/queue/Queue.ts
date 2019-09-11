@@ -1,7 +1,7 @@
 import { IQueue } from './IQueue';
 
 export class Queue<T> implements IQueue<T> {
-	private _data: T[] = [];
+	protected _data: T[] = [];
 
 	constructor(initArr: T[] = []) {
 		this._data = [...initArr];
